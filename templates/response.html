@@ -1,0 +1,42 @@
+<div class="recordsFound">
+  <h3>{{data|length}} Records Found</h3>
+</div>
+<div class="resultsContainer">
+  {% for student in data %}
+  <div class="card">
+    <div class="cardImg">
+      <img
+        src="../static/images/avatar-1.svg"
+        alt="Avatar"
+        width="40"
+        height="40"
+      />
+    </div>
+    <div class="cardContent">
+      <h2 class="cardTitle">{{ student.studentname }}</h2>
+      <p class="cardProfession">{{student.currentclass}}</p>
+      <div class="hRule"></div>
+      <div class="detailsTitles">
+        <p>Total Classes</p>
+        <p>Last Check-in Date</p>
+      </div>
+      <div class="detailsParagraphs">
+        <p>32/{{student.totalclasses}} classes used</p>
+        <p>2021-04-03</p>
+      </div>
+
+      <div class="lastMentor">
+        <p>Last Mentor</p>
+      </div>
+
+      <div class="nameOfLastMentor">
+        <p>{{student.mentorname}}</p>
+      </div>
+
+      <div class="checkinBtn">
+        <p>Check in</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

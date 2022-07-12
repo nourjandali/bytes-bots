@@ -10,13 +10,37 @@
       src="https://kit.fontawesome.com/cef20f8320.js"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+      type="text/javascript"
+    ></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
+    <script>
+      $(document).ready(function () {
+        function load_data(studentName) {
+          $.post("/search", { studentName: studentName }).done(function (data) {
+            $("#result").html(data);
+            $("#result").append(data.htmlresponse);
+          });
+        }
+        $("#search_text").keyup(function (e) {
+          if (e.which == 13) {
+            var search = $(this).val();
+            if (search != "") {
+              load_data(search);
+            } else {
+              load_data();
+            }
+          }
+        });
+      });
+    </script>
     <title>Bytes&Bots - {% block title %}{% endblock %}</title>
   </head>
 

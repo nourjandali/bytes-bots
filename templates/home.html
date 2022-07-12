@@ -4,42 +4,14 @@ block content %}
   <h1>Check in</h1>
 </div>
 <div class="searchBtn">
-  <i class="fa-solid fa-magnifying-glass searchIcon"></i>
-  <input type="search" id="site-search" name="q" />
+  <!-- <i class="fa-solid fa-magnifying-glass searchIcon"></i> -->
+  <input
+    type="search"
+    id="search_text"
+    name="search_text"
+    placeholder="Search..."
+  />
+  <div id="result"></div>
 </div>
-<div class="cards">
-  <div class="cardImg">
-    <img
-      src="../static/images/avatar-1.svg"
-      alt="Avatar"
-      width="40"
-      height="40"
-    />
-  </div>
-  <div class="card">
-    <h2 class="cardTitle">Benjamin Kim</h2>
-    <p class="cardProfession">Gamologie</p>
-    <div class="hRule"></div>
-    <div class="detailsTitles">
-      <p>Total Classes</p>
-      <p>Last Check-in Date</p>
-    </div>
-    <div class="detailsParagraphs">
-      <p>32/32 classes used</p>
-      <p>2021-04-03</p>
-    </div>
 
-    <div class="lastMentor">
-      <p>Last Mentor</p>
-    </div>
-
-    <div class="nameOfLastMentor">
-      <p>Fernando De Paz</p>
-    </div>
-
-    <div class="checkinBtn">
-      <p>Check in</p>
-    </div>
-  </div>
-</div>
 {% endblock %}
