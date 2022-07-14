@@ -12,7 +12,6 @@
 
 .searchBtn {
   margin: 0px 0px 16px 32px;
-  /* position: relative; */
 }
 
 .searchBtn > input {
@@ -30,13 +29,6 @@
   color: #3c4142;
 }
 
-/* .searchIcon {
-  position: absolute;
-  top: 8.5px;
-  left: 900px;
-  opacity: 0.5;
-} */
-
 .resultsContainer {
   display: flex;
   justify-content: center;
@@ -52,21 +44,14 @@
   border-radius: 6px;
 }
 
-.cardImg {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .cardContent {
   text-align: center;
 }
 
 .cardTitle {
   color: #3c4142;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   margin-top: 16px;
   margin-bottom: 0px;
   padding-bottom: 0px;

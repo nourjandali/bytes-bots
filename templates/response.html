@@ -4,14 +4,6 @@
 <div class="resultsContainer">
   {% for student in data %}
   <div class="card">
-    <div class="cardImg">
-      <img
-        src="../static/images/avatar-1.svg"
-        alt="Avatar"
-        width="40"
-        height="40"
-      />
-    </div>
     <div class="cardContent">
       <h2 class="cardTitle">{{ student.studentname }}</h2>
       <p class="cardProfession">{{student.currentclass}}</p>
@@ -21,8 +13,8 @@
         <p>Last Check-in Date</p>
       </div>
       <div class="detailsParagraphs">
-        <p>32/{{student.totalclasses}} classes used</p>
-        <p>2021-04-03</p>
+        <p>{{student.noOfDebriefs}}/{{student.totalclasses}} classes used</p>
+        <p>{{student.debriefdate}}</p>
       </div>
 
       <div class="lastMentor">

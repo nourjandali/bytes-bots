@@ -1,3 +1,4 @@
+from typing import ChainMap
 from flask import Flask
 from flask import render_template, request, jsonify
 import psycopg2
@@ -23,9 +24,21 @@ def home():
 def test():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     studentName = request.form['studentName']
-    query = "SELECT * FROM public.reportcards WHERE studentname ILIKE '%" + studentName +"%' ORDER BY studentname ASC"
-    cur.execute(query)
-    return render_template('response.html', data=cur.fetchall())
+    cur.execute("SELECT studentname,currentclass,id,debriefsheetid, totalclasses FROM reportcards WHERE studentname ILIKE '%" + studentName +"%' ORDER BY studentname ASC")
+    students = cur.fetchall();
+    results = [];
+    for student in students:
+        cur.execute("""SELECT debriefid,debriefdate,mentorname from debriefs
+        WHERE studentid = '%s' and debriefsheetid ='%s'
+        ORDER BY debriefdate DESC""" % (student[2],student[3])  
+                    )
+        debriefs = cur.fetchall()
+        cur.execute("""Select totalclass, usage, importedclasses from packages
+                    where studentid = '%s' and debriefsheetid ='%s'""" % (student[2],student[3]) 
+                    )
+        packages = cur.fetchone()
+        results.append({**dict(student), **dict(debriefs[0]), **dict(packages), 'noOfDebriefs': len(debriefs)  })
+    return render_template('response.html', data=results)
 
 
 if __name__ == "__main__":
