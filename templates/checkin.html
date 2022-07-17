@@ -3,16 +3,16 @@
 <div class="dataFound">
   <h3>{{data|length}} Student(s) Checked In</h3>
 </div>
-<div class="resultsContainer">
+<div class="dataContainer">
   {% for student in data %}
-  <div class="card">
-    <div class="cardContent">
-      <h2 class="cardTitle">{{ student.studentname }}</h2>
-      <div class="hRule"></div>
-      <div class="detailsTitles">
+  <div class="checkInCard">
+    <div class="checkInCardContent">
+      <h2 class="contentTitle">{{ student.studentname }}</h2>
+      <div class="hLine"></div>
+      <div class="checkinDetails">
         <p>Last Check-in Date</p>
       </div>
-      <div class="detailsParagraphs">
+      <div class="checkinTime">
         <p>{{student.checkintime}}</p>
       </div>
 

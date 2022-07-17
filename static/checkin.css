@@ -3,7 +3,7 @@
   color: #3c4142;
 }
 
-.resultsContainer {
+.dataContainer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -11,34 +11,34 @@
   margin-top: 32px;
 }
 
-.card {
+.checkInCard {
   width: calc(25% - (32px * 2));
   border: 1px solid rgba(22, 21, 19, 0.1);
   background-color: #ffffff;
   border-radius: 6px;
 }
 
-.cardContent {
+.checkInCardContent {
   text-align: center;
 }
 
-.cardTitle {
+.contentTitle {
   color: #3c4142;
-  font-size: 2 0px;
+  font-size: 18px;
   font-weight: 700;
   margin-top: 16px;
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
 
-.hRule {
+.hLine {
   margin: auto;
   margin-top: 10px;
   border: 0.5px solid #ededed;
   max-width: 85%;
 }
 
-.detailsTitles {
+.checkinDetails {
   display: flex;
   justify-content: space-between;
   margin: 0px 24px 0px 24px;
@@ -46,18 +46,18 @@
   font-weight: 700;
 }
 
-.detailsTitles > p {
+.checkinDetails > p {
   margin-bottom: 8px;
 }
 
-.detailsParagraphs {
+.checkinTime {
   display: flex;
   justify-content: space-between;
   margin: 0px 24px 0px 24px;
   font-size: 12px;
   font-weight: 400;
 }
-.detailsParagraphs > p {
+.checkinTime > p {
   margin-top: 0px;
 }
 
