@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}{{ super() }}Check-in{% endblock %}
+{% block content %}
+<div class="dataFound">
+  <h3>{{data|length}} Student(s) Checked In</h3>
+</div>
+<div class="resultsContainer">
+  {% for student in data %}
+  <div class="card">
+    <div class="cardContent">
+      <h2 class="cardTitle">{{ student.studentname }}</h2>
+      <div class="hRule"></div>
+      <div class="detailsTitles">
+        <p>Last Check-in Date</p>
+      </div>
+      <div class="detailsParagraphs">
+        <p>{{student.checkintime}}</p>
+      </div>
+
+      <div class="checkoutBtn">
+        <p>Check out</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
