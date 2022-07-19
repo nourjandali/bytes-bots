@@ -10,7 +10,54 @@ block content %}
     name="search_text"
     placeholder="Search..."
   />
+  <div id="loading" class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
   <div id="result"></div>
 </div>
 
+<script>
+  function showLoading() {
+    document.getElementById("loading").classList.add("show");
+  }
+  function stopLoading() {
+    document.getElementById("loading").classList.remove("show");
+  }
+  function throttle(f, delay) {
+    var timer = null;
+    return function () {
+      var context = this,
+        args = arguments;
+      clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        f.apply(context, args);
+      }, delay || 500);
+    };
+  }
+  $(document).ready(function () {
+    function load_data(studentName) {
+      showLoading();
+      $.post("/search", { studentName: studentName }).done(function (data) {
+        $("#result").html(data);
+        $("#result").append(data.htmlresponse);
+        stopLoading();
+      });
+    }
+    $("#search_text").keyup(
+      throttle(function () {
+        var search = $(this).val();
+        if (search.length >= 3) {
+          if (search != "") {
+            load_data(search);
+          } else {
+            load_data();
+          }
+        }
+      }, 1000)
+    );
+  });
+</script>
 {% endblock %}
