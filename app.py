@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 keepalive_kwargs = {
   "keepalives": 1,
-  "keepalives_idle": 1000,
+  "keepalives_idle": 60,
   "keepalives_interval": 10,
   "keepalives_count": 5
 }
