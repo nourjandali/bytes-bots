@@ -48,7 +48,7 @@ def fetchDatabase():
         results.append({**dict(student), **dict(debriefs[0]), **dict(packages), 'noOfDebriefs': len(debriefs)  })
     return render_template("response.html", data=results)
 
-@app.route("/checkin", methods=["GET", "POST"])
+@app.route("/checkin", methods=["POST"])
 def checkinList():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute("SELECT studentname, CAST(checkintime AS varchar(10)) FROM checkin")
