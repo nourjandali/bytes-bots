@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 keepalive_kwargs = {
   "keepalives": 1,
-  "keepalives_idle": 60,
-  "keepalives_interval": 60,
-  "keepalives_count": 100
+  "keepalives_idle":10000,
+  "keepalives_interval": 10000,
+  "keepalives_count": 1000
 }
 
 DB_HOST = "ec2-52-20-166-21.compute-1.amazonaws.com"
