@@ -7,10 +7,10 @@ import psycopg2.extras
 app = Flask(__name__)
 
 keepalive_kwargs = {
-  "keepalives": 1,
-  "keepalives_idle":1000,
-  "keepalives_interval": 1000,
-  "keepalives_count": 100
+    "keepalives": 1,
+    "keepalives_idle": 1000,
+    "keepalives_interval": 1000,
+    "keepalives_count": 100
 }
 
 DB_HOST = "ec2-52-20-166-21.compute-1.amazonaws.com"
@@ -19,7 +19,7 @@ DB_USER = "ciqopzuwvoexbs"
 DB_PASS = "1607715c655c26b9e8e966b51cd21fb23640135a839807ec5639afee19628349"
 DB_PORT = "5432"
 
-conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT,  **keepalive_kwargs)
+conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT, **keepalive_kwargs)
 
 
 @app.route("/")
@@ -31,29 +31,35 @@ def home():
 def fetchDatabase():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     studentName = request.form['studentName']
-    cur.execute("SELECT studentname, currentclass, id, debriefsheetid, totalclasses FROM reportcards WHERE studentname ILIKE '%" + studentName +"%' ORDER BY studentname ASC")
+    cur.execute(
+        "SELECT studentname, currentclass, id, debriefsheetid, totalclasses FROM reportcards WHERE studentname ILIKE '%" + studentName + "%' ORDER BY studentname ASC")
     students = cur.fetchall();
     results = [];
     for student in students:
         cur.execute(
-                    """SELECT debriefid, debriefdate, mentorname 
+            """SELECT debriefid, debriefdate, mentorname 
                         FROM debriefs
                         WHERE studentid = '%s' 
                         AND debriefsheetid ='%s'
-                        ORDER BY debriefdate DESC""" 
-                        % (student[2],student[3])  
-                    )
+                        ORDER BY debriefdate DESC"""
+            % (student[2], student[3])
+        )
         debriefs = cur.fetchall()
         cur.execute(
-                    """SELECT totalclass, usage, importedclasses 
+            """SELECT totalclass, usage, importedclasses 
                         FROM packages
                         WHERE studentid = '%s' 
-                        AND debriefsheetid ='%s'""" 
-                        % (student[2],student[3]) 
-                    )
+                        AND debriefsheetid ='%s'"""
+            % (student[2], student[3])
+        )
         packages = cur.fetchone()
-        results.append({**dict(student), **dict(debriefs[0]), **dict(packages), 'noOfDebriefs': len(debriefs)  })
+        if len(debriefs):
+            results.append({**dict(student), **dict(debriefs[0]), **dict(packages), 'noOfDebriefs': len(debriefs)})
+        else:
+            results.append({**dict(student), **dict(packages), 'noOfDebriefs': len(debriefs)})
+
     return render_template("response.html", data=results)
+
 
 @app.route("/checkin", methods=["GET", "POST"])
 def checkinList():

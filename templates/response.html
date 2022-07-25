@@ -14,7 +14,12 @@
       </div>
       <div class="detailsParagraphs">
         <p>{{student.noOfDebriefs}}/{{student.totalclasses}} classes used</p>
+
+        {% if student.debriefdate %}
         <p>{{student.debriefdate}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
       </div>
 
       <div class="lastMentor">
@@ -22,7 +27,11 @@
       </div>
 
       <div class="nameOfLastMentor">
+        {% if student.mentorname %}
         <p>{{student.mentorname}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
       </div>
 
       <div class="checkinBtn">
