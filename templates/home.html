@@ -20,6 +20,15 @@ block content %}
 </div>
 
 <script>
+  function addtoCheckinList(e) {
+    $.post("/checkin", {
+      studentId: e.getAttribute("data-studentId"),
+      studentName: e.getAttribute("data-studentName"),
+    }).done(function (data) {
+      console.log(data);
+    });
+  }
+
   function showLoading() {
     document.getElementById("loading").classList.add("show");
   }

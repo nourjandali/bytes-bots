@@ -1,8 +1,8 @@
-from typing import ChainMap
 from flask import Flask
-from flask import render_template, request, jsonify
+from flask import render_template, request
 import psycopg2
 import psycopg2.extras
+import datetime
 
 app = Flask(__name__)
 
@@ -61,12 +61,28 @@ def fetchDatabase():
     return render_template("response.html", data=results)
 
 
-@app.route("/checkin", methods=["GET", "POST"])
+@app.route("/checkin", methods=["GET"])
 def checkinList():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("SELECT studentname, CAST(checkintime AS varchar(10)) FROM checkin")
+    cur.execute("SELECT studentname, studentid, CAST(checkintime AS varchar(10)) FROM checkin")
     students = cur.fetchall();
     return render_template("checkin.html", data=students)
+
+
+@app.route("/checkin", methods=["POST"])
+def addtoCheckinList():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    studentName = request.form['studentName']
+    studentId = request.form['studentId']
+    checkinDate = datetime.datetime.now()
+    cur.execute("INSERT INTO checkin (studentname, studentid, checkintime) VALUES ('" + studentName + "', '" + studentId + "', '" + checkinDate.strftime("%Y-%m-%d, %H:%M:%S") + "') ")
+    return "Success"
+
+@app.route("/checkin/<studentId>", methods=["DELETE"])
+def removeFromCheckinList(studentId):
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cur.execute("DELETE FROM checkin WHERE studentid='" + studentId + "' ")
+    return "Success"
 
 
 if __name__ == "__main__":

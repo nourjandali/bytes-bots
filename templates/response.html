@@ -34,7 +34,13 @@
         {% endif %}
       </div>
 
-      <div class="checkinBtn">
+      <div
+        class="checkinBtn"
+        id="checkIn"
+        data-studentId="{{student.id}}"
+        data-studentName="{{student.studentname}}"
+        onclick="addtoCheckinList(this)"
+      >
         <p>Check in</p>
       </div>
     </div>

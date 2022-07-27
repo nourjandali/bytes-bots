@@ -1,5 +1,16 @@
 {% extends "base.html" %} {% block title %}{{ super() }}Check-in{% endblock %}
 {% block content %}
+<script>
+  function removeFromCheckinList(e) {
+    $.ajax({
+      url: "/checkin/" + e.getAttribute("data-studentId"),
+      type: "DELETE",
+      success: function (data) {
+        console.log(data);
+      },
+    });
+  }
+</script>
 <div class="dataFound">
   <h3>{{data|length}} Student(s) Checked In</h3>
 </div>
@@ -16,7 +27,11 @@
         <p>{{student.checkintime}}</p>
       </div>
 
-      <div class="checkoutBtn">
+      <div
+        class="checkoutBtn"
+        data-studentId="{{student.studentid}}"
+        onclick="removeFromCheckinList(this)"
+      >
         <p>Check out</p>
       </div>
     </div>
