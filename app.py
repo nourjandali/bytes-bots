@@ -3,6 +3,7 @@ from flask import render_template, request
 import psycopg2
 import psycopg2.extras
 import datetime
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -64,9 +65,15 @@ def fetchDatabase():
 @app.route("/checkin", methods=["GET"])
 def checkinList():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("SELECT studentname, studentid, CAST(checkintime AS varchar(10)) FROM checkin")
+    cur.execute("SELECT studentname, studentid, checkintime FROM checkin ORDER BY checkintime DESC")
     students = cur.fetchall();
-    return render_template("checkin.html", data=students)
+
+    v = {}
+    for student in students:
+        v.setdefault(student[2].strftime("%A (%b %d)"), []).append(student)
+
+    # return jsonify(v);
+    return render_template("checkin.html", data=v)
 
 
 @app.route("/checkin", methods=["POST"])

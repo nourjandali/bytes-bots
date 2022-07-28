@@ -1,5 +1,16 @@
 {% extends "base.html" %} {% block title %}{{ super() }}Home{% endblock %} {%
 block content %}
+<nav class="navBar">
+  <div class="bytesBotsLogo">
+    <img src="../static/images/BytesBotsLogo.png" alt="Logo" />
+  </div>
+  <div class="checkedInBtn">
+    <button onclick="location.href='http://localhost:5000/checkin'">
+      Checked Ins
+    </button>
+  </div>
+</nav>
+<hr />
 <div class="checkinTitle">
   <h1>Check in</h1>
 </div>
@@ -27,8 +38,14 @@ block content %}
     }).done(function (data) {
       console.log(data);
     });
+    e.style.backgroundColor = "#fac776";
+    e.textContent = "Checked out";
+    e.style.padding = "14px 14px 14px 14px";
   }
-
+  // e.innerHTML =
+  // '<span style=" color: white; background-color: #fac776">Button clicked</span>';
+  // font-size: 14px; font-weight: bold;
+  // ;border: 0px; border-radius: 4px; margin: 16px 16px 0px 0px;padding: 12px 24px 12px 24px; cursor: pointer;
   function showLoading() {
     document.getElementById("loading").classList.add("show");
   }

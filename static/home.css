@@ -1,3 +1,34 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bytesBotsLogo {
+  margin: 16px 0px 0px 16px;
+}
+
+.checkedInBtn > button {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #144270;
+  border: 0px;
+  border-radius: 4px;
+  margin: 16px 16px 0px 0px;
+  padding: 12px 24px 12px 24px;
+  cursor: pointer;
+}
+
+.checkedInBtn > button:hover {
+  background-color: #144770;
+}
+
+hr {
+  border-width: 0.1px !important;
+  margin-top: 32px;
+  max-width: 70%;
+}
 .checkinTitle {
   color: #3c4142;
   text-align: center;

@@ -9,31 +9,36 @@
         console.log(data);
       },
     });
+    window.location.reload();
   }
 </script>
-<div class="dataFound">
-  <h3>{{data|length}} Student(s) Checked In</h3>
-</div>
-<div class="dataContainer">
-  {% for student in data %}
-  <div class="checkInCard">
-    <div class="checkInCardContent">
-      <h2 class="contentTitle">{{ student.studentname }}</h2>
-      <div class="hLine"></div>
-      <div class="checkinDetails">
-        <p>Last Check-in Date</p>
-      </div>
-      <div class="checkinTime">
-        <p>{{student.checkintime}}</p>
-      </div>
+<div>
+  {% for date in data %}
+  <div>
+    <h2>{{date}}</h2>
+    <div class="dataContainer">
+      {% for student in data[date] %}
+      <div class="checkInCard">
+        <div class="checkInCardContent">
+          <h2 class="contentTitle">{{ student.studentname }}</h2>
+          <div class="hLine"></div>
+          <div class="checkinDetails">
+            <p>Last Check-in Date</p>
+          </div>
+          <div class="checkinTime">
+            <p>{{student.checkintime.strftime("%Y-%m-%d")}}</p>
+          </div>
 
-      <div
-        class="checkoutBtn"
-        data-studentId="{{student.studentid}}"
-        onclick="removeFromCheckinList(this)"
-      >
-        <p>Check out</p>
+          <div
+            class="checkoutBtn"
+            data-studentId="{{student.studentid}}"
+            onclick="removeFromCheckinList(this)"
+          >
+            <p>Check out</p>
+          </div>
+        </div>
       </div>
+      {% endfor %}
     </div>
   </div>
   {% endfor %}
