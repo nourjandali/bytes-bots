@@ -34,7 +34,16 @@
         {% endif %}
       </div>
 
-      <div
+      {% if student.id in checkinStudents %}
+      <button
+        class="checkedinBtn"
+        data-studentId="{{student.id}}"
+        data-studentName="{{student.studentname}}"
+      >
+        <p>Already Checked-in</p>
+      </button>
+      {% else %}
+      <button
         class="checkinBtn"
         id="checkIn"
         data-studentId="{{student.id}}"
@@ -42,7 +51,8 @@
         onclick="addtoCheckinList(this)"
       >
         <p>Check in</p>
-      </div>
+      </button>
+      {% endif %}
     </div>
   </div>
   {% endfor %}

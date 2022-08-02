@@ -35,6 +35,11 @@ def fetchDatabase():
     cur.execute(
         "SELECT studentname, currentclass, id, debriefsheetid, totalclasses FROM reportcards WHERE studentname ILIKE '%" + studentName + "%' ORDER BY studentname ASC")
     students = cur.fetchall();
+
+    cur.execute("SELECT studentid FROM checkin")
+    checkin = cur.fetchall();
+    checkinStudents = [item for sublist in checkin for item in sublist]
+    
     results = [];
     for student in students:
         cur.execute(
@@ -59,7 +64,10 @@ def fetchDatabase():
         else:
             results.append({**dict(student), **dict(packages), 'noOfDebriefs': len(debriefs)})
 
-    return render_template("response.html", data=results)
+        
+
+        print(checkinStudents)
+    return render_template("response.html", data=results,checkinStudents=checkinStudents )
 
 
 @app.route("/checkin", methods=["GET"])

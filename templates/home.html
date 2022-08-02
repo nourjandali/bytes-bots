@@ -5,9 +5,9 @@ block content %}
     <img src="../static/images/BytesBotsLogo.png" alt="Logo" />
   </div>
   <div class="checkedInBtn">
-    <button onclick="location.href='https://bytes-bots.herokuapp.com/checkin'">
-      Checked Ins
-    </button>
+    <a href="/checkin">
+      <button>Checked Ins</button>
+    </a>
   </div>
 </nav>
 <hr />
@@ -38,14 +38,12 @@ block content %}
     }).done(function (data) {
       console.log(data);
     });
-    e.style.backgroundColor = "#fac776";
-    e.textContent = "Checked out";
-    e.style.padding = "14px 14px 14px 14px";
+    e.querySelector("p").textContent = "Already Checked-in";
+    e.classList.add("checkedinBtn");
+    e.classList.remove("checkinBtn");
+    e.disabled = true;
   }
-  // e.innerHTML =
-  // '<span style=" color: white; background-color: #fac776">Button clicked</span>';
-  // font-size: 14px; font-weight: bold;
-  // ;border: 0px; border-radius: 4px; margin: 16px 16px 0px 0px;padding: 12px 24px 12px 24px; cursor: pointer;
+
   function showLoading() {
     document.getElementById("loading").classList.add("show");
   }
